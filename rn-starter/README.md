@@ -150,3 +150,22 @@
   }
 
   ```
+
+### Section 4 Navigation Screens
+
+- Button Types - very simple component for showing a button and detecting a press
+- TouchableOpacity - highly customizable component that can detect a press on
+
+  - Example
+
+  ```JSX
+  	<Button
+  			style={styles.buttonStyles}
+  			title='Go to Components Demo'
+  			onPress={() => navigation.navigate('Components')}
+  		/>
+
+  <TouchableOpacity onPress={() => props.navigation.navigate('Lists')}>
+  			<Text>Go to List Demo</Text>
+  		</TouchableOpacity>
+  ```
