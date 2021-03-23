@@ -91,4 +91,62 @@
   - We can assemble different JSX elements like normal HTML
   - We can configure different JSX element using 'props'
   - We can refer to JS variables inside of a JSX block by using curly braces
-  - WE can assign JSX elements to a variable, then show that variable inside of a JSX block
+  - Ww can assign JSX elements to a variable, then show that variable inside of a JSX block
+
+### Section 3 List Building with Style
+
+- FlatList element
+- Turns an array into a list of elements
+- We are required to pass in a 'props' of 'data' - the array of data that we are going to create a bunch of elements out of
+- Also required to pass in a 'renderItem' prop - function that will turn each individual item into an element
+- If you are coming from React on the web, you might be used to 'mapping' an array of data to build a list - FlatList is better with React Native
+- `keyExtractor` prop is essential
+- `horizontal` prop - to make the list be horizontally availble and to be scrolled horizontally, by default it is false
+- `showsHorizontalScrollIndicator` prop - show/remove horizontal scroll indicator
+- Example
+
+  ```JSX
+    	const friends = [
+  	{
+  		name: 'Friend#1',
+  		age: 20,
+  	},
+  	{
+  		name: 'Friend#2',
+  		age: 45,
+  	},
+  	{
+  		name: 'Friend#3',
+  		age: 32,
+  	},
+  	{
+  		name: 'Friend#4',
+  		age: 27,
+  	},
+  	{
+  		name: 'Friend#5',
+  		age: 30,
+  	},
+  ];
+
+  const Example = () => {
+    return (
+
+      <FlatList
+  			keyExtractor={(friend) => friend.name}
+  			data={friends}
+  			showsHorizontalScrollIndicator={false}
+  			renderItem={({ item }) => {
+          // element === { item: { name: 'Fiend#1'}, index: 0}
+  				const { name, age } = item;
+  				return (
+  					<Text style={styles.textStyles}>
+  						{name} - Age {age}
+  					</Text>
+  				);
+  			}}
+  		/>
+    )
+  }
+
+  ```
