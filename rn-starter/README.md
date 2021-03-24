@@ -169,3 +169,109 @@
   			<Text>Go to List Demo</Text>
   		</TouchableOpacity>
   ```
+
+### Section 5 Building Reusable Components
+
+- Destructuring props
+
+### Section 6 State Management in React Components
+
+- How to Identify
+  - What piece of data is changing in our app?
+  - What type of data is it?
+  - What is the data's starting (default) value?
+- Usage of useState (react hook)
+  ```JSX
+  const [counter, setCounter] = useState(0);
+  ```
+- We **never** directly modify a state variable. React donesn't detect this change! Only use the 'setter' function
+- We can name the state variable anything we wish
+- We can track any kind of data that changes over time - a number, string, array of objects, etc
+- When a component is rerendered, all of its children get rerendered too
+- A state variable can be passed to a child component! At that point, the state variable is now being used as props
+
+- Reducer
+
+  - function that manages, changes to an object
+  - function that gets called with two objects
+    - argument #1 - object that has all of our state in it
+    - argument #2 - object that describes the update we want to make
+  - we look at argument #2 and use it to decide how to change argument #1
+  - two technicalities
+  - we never change argument #1 directly
+  - we must always return a value to be used as argument #1
+
+  ```JSX
+   import React, { useReducer } from 'react';
+
+   // ideal to be defined outside component
+   const reducer = (state, action) => {
+     // state --- { red: number, green: number, blue: number }
+     // action === { colorToChange: 'red' || 'green' || 'blue', amount: 15 || -15 }
+     switch (action.colorToChange) {
+       case 'red':
+         // dont do this! => state.red = state.red - 15
+         return {
+           ...state,
+           red: state.red + action.amount
+         }
+      case 'green':
+        return {
+           ...state,
+           green: state.green + action.amount
+         }
+      case 'blue':
+        return {
+           ...state,
+           blue: state.blue + action.amount
+         }
+      default:
+        return state;
+     }
+   }
+   const COLOR_INCREMENT = 15;
+
+   const Example = () => {
+     const [state, dispatch] = useReducer(reducer, { red: 0, green: 0, blue: 0});
+     //state => { red: 0, green: 0, blue: 0 }
+     const {red, green, blue} = state;
+
+     <Button onIncrease={() => dispatch({ colorToChange: 'red', amount: COLOR_INCREMENT })}>
+   }
+  ```
+
+  - community conventions in reducers
+
+    - `{type: 'change_red', payload: 15} // {colorToChange: 'red', amount: 15}`
+    - type - string that describes the exact change operation we want to make
+    - payload - some data that is critical to the change operation
+
+  - showing a text input
+
+  ```JSX
+  import React, {useState} from 'react'
+  import { View, Text, TextInput, StyleSheet } from 'react-native';
+
+  const Example = () => {
+    const [password,setPassword] = useState('');
+    return (
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={password}
+          onChangeText={(newValue) => setPassword(newValue)}
+        />
+    )
+  }
+
+  const styles = StyleSheet.create({
+    input: {
+      margin: 15,
+      borderColor: 'black',
+      borderWidth: 1
+    }
+  })
+
+  export default TextScreen;
+  ```
