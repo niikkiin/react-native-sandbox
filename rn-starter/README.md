@@ -275,3 +275,30 @@
 
   export default TextScreen;
   ```
+
+### Section 7 How to Handle Screen Layout
+
+- Layout Systems
+
+  - Box Object Model
+    - the height/width of an element + the space around it
+    - use this to affect the positioning of a single element
+      ![Box Object Model Details 1](assets/box-object-model-1.png)
+      ![Box Object Model Details 2](assets/box-object-model-2.png)
+      ![Box Object Model Details 3](assets/box-object-model-3.png)
+      ![Box Object Model Details 4](assets/box-object-model-4.png)
+  - Flex Box
+
+    - how some number of sibling elements get laid out inside a parent
+    - use this to position multiple elements with a common parent
+      ![Flex Box Model Details 1](assets/flex-box-model-1.png)
+      ![Flex Box Model Details 2](assets/flex-box-model-2.png)
+      ![Flex Box Model Details 3](assets/flex-box-model-3.png)
+
+  - Position
+    - how a single element gets laid out inside of a parent
+    - use this to override box object model + flex box
+      ![Position Model Details 1](assets/position-model-1.png)
+
+  **Box Object Model Rules**
+  ![Box Object Model Rules](assets/box-object-model-rules.png)
